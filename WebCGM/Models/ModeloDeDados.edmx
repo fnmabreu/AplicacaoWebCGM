@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CGMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BannersPublicitarios">
+          <Key>
+            <PropertyRef Name="IDBanner" />
+          </Key>
+          <Property Name="IDBanner" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TituloCampanha" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="BannerCampanha" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="LinkBanner" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Cidades">
+          <Key>
+            <PropertyRef Name="IDCidade" />
+          </Key>
+          <Property Name="IDCidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Especialidades">
+          <Key>
+            <PropertyRef Name="IDEspecialidade" />
+          </Key>
+          <Property Name="IDEspecialidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicos">
+          <Key>
+            <PropertyRef Name="IDMedico" />
+          </Key>
+          <Property Name="IDMedico" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CRM" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Localidade" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="TemClinica" Type="bit" Nullable="false" />
+          <Property Name="WebsiteBlog" Type="varchar" MaxLength="80" />
+          <Property Name="IDCidade" Type="int" Nullable="false" />
+          <Property Name="IDEspecialidade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Utilizadores">
+          <Key>
+            <PropertyRef Name="IDUtilizador" />
+          </Key>
+          <Property Name="IDUtilizador" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Medicos_Cidades">
+          <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
+          <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="IDCidade" />
+            </Principal>
+            <Dependent Role="Medicos">
+              <PropertyRef Name="IDCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicos_Especialidades">
+          <End Role="Especialidades" Type="Self.Especialidades" Multiplicity="1" />
+          <End Role="Medicos" Type="Self.Medicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidades">
+              <PropertyRef Name="IDEspecialidade" />
+            </Principal>
+            <Dependent Role="Medicos">
+              <PropertyRef Name="IDEspecialidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CGMModelStoreContainer">
+          <EntitySet Name="BannersPublicitarios" EntityType="Self.BannersPublicitarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidades" EntityType="Self.Especialidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicos" EntityType="Self.Medicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizadores" EntityType="Self.Utilizadores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Medicos_Cidades" Association="Self.FK_Medicos_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Medicos" EntitySet="Medicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicos_Especialidades" Association="Self.FK_Medicos_Especialidades">
+            <End Role="Especialidades" EntitySet="Especialidades" />
+            <End Role="Medicos" EntitySet="Medicos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CGMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="IDCidade" />
+          </Key>
+          <Property Name="IDCidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Medicos" Relationship="Self.FK_Medicos_Cidades" FromRole="Cidades" ToRole="Medicos" />
+        </EntityType>
+        <EntityType Name="Especialidade">
+          <Key>
+            <PropertyRef Name="IDEspecialidade" />
+          </Key>
+          <Property Name="IDEspecialidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Medicos" Relationship="Self.FK_Medicos_Especialidades" FromRole="Especialidades" ToRole="Medicos" />
+        </EntityType>
+        <EntityType Name="Medico">
+          <Key>
+            <PropertyRef Name="IDMedico" />
+          </Key>
+          <Property Name="IDMedico" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CRM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Localidade" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TemClinica" Type="Boolean" Nullable="false" />
+          <Property Name="WebsiteBlog" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="IDCidade" Type="Int32" Nullable="false" />
+          <Property Name="IDEspecialidade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Medicos_Cidades" FromRole="Medicos" ToRole="Cidades" />
+          <NavigationProperty Name="Especialidade" Relationship="Self.FK_Medicos_Especialidades" FromRole="Medicos" ToRole="Especialidades" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="IDUtilizador" />
+          </Key>
+          <Property Name="IDUtilizador" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Medicos_Cidades">
+          <End Role="Cidades" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Medicos" Type="Self.Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="IDCidade" />
+            </Principal>
+            <Dependent Role="Medicos">
+              <PropertyRef Name="IDCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicos_Especialidades">
+          <End Role="Especialidades" Type="Self.Especialidade" Multiplicity="1" />
+          <End Role="Medicos" Type="Self.Medico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidades">
+              <PropertyRef Name="IDEspecialidade" />
+            </Principal>
+            <Dependent Role="Medicos">
+              <PropertyRef Name="IDEspecialidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntidadeCGM" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cidades" EntityType="Self.Cidade" />
+          <EntitySet Name="Especialidades" EntityType="Self.Especialidade" />
+          <EntitySet Name="Medicos" EntityType="Self.Medico" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Utilizadores" EntityType="CGMModel.Utilizador" />
+          <AssociationSet Name="FK_Medicos_Cidades" Association="Self.FK_Medicos_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Medicos" EntitySet="Medicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicos_Especialidades" Association="Self.FK_Medicos_Especialidades">
+            <End Role="Especialidades" EntitySet="Especialidades" />
+            <End Role="Medicos" EntitySet="Medicos" />
+          </AssociationSet>
+          <EntitySet Name="BannersPublicitarios" EntityType="CGMModel.BannersPublicitario" />
+        </EntityContainer>
+        <EntityType Name="BannersPublicitario">
+          <Key>
+            <PropertyRef Name="IDBanner" />
+          </Key>
+          <Property Name="IDBanner" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TituloCampanha" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="BannerCampanha" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LinkBanner" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CGMModelStoreContainer" CdmEntityContainer="EntidadeCGM">
+          <EntitySetMapping Name="Cidades">
+            <EntityTypeMapping TypeName="CGMModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidades">
+                <ScalarProperty Name="IDCidade" ColumnName="IDCidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidades">
+            <EntityTypeMapping TypeName="CGMModel.Especialidade">
+              <MappingFragment StoreEntitySet="Especialidades">
+                <ScalarProperty Name="IDEspecialidade" ColumnName="IDEspecialidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicos">
+            <EntityTypeMapping TypeName="CGMModel.Medico">
+              <MappingFragment StoreEntitySet="Medicos">
+                <ScalarProperty Name="IDMedico" ColumnName="IDMedico" />
+                <ScalarProperty Name="CRM" ColumnName="CRM" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Localidade" ColumnName="Localidade" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TemClinica" ColumnName="TemClinica" />
+                <ScalarProperty Name="WebsiteBlog" ColumnName="WebsiteBlog" />
+                <ScalarProperty Name="IDCidade" ColumnName="IDCidade" />
+                <ScalarProperty Name="IDEspecialidade" ColumnName="IDEspecialidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CGMModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizadores">
+            <EntityTypeMapping TypeName="CGMModel.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizadores">
+                <ScalarProperty Name="IDUtilizador" ColumnName="IDUtilizador" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannersPublicitarios">
+            <EntityTypeMapping TypeName="CGMModel.BannersPublicitario">
+              <MappingFragment StoreEntitySet="BannersPublicitarios">
+                <ScalarProperty Name="LinkBanner" ColumnName="LinkBanner" />
+                <ScalarProperty Name="BannerCampanha" ColumnName="BannerCampanha" />
+                <ScalarProperty Name="TituloCampanha" ColumnName="TituloCampanha" />
+                <ScalarProperty Name="IDBanner" ColumnName="IDBanner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
