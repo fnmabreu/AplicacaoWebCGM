@@ -24,9 +24,18 @@
         </td>
         <td>
             @Html.ActionLink("Editar", "Editar", new { id=item.IDEspecialidade }) |
-            @Html.ActionLink("Remover", "Remover", new { id=item.IDEspecialidade })
+            @Html.ActionLink("Remover", "Remover", new { id=item.IDEspecialidade }, new { @class = "delete-link" })
         </td>
     </tr>
 }
 
 </table>
+
+<div id="delete-dialog" title="Confirmation" style="display:none;">
+    <p>Tem a certeza que deseja eliminar a especialidade?</p>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/ConfirmationDelete.js" type="text/javascript"></script>
+}

@@ -67,19 +67,18 @@ namespace WebCGM.Controllers
             return View(cidade);
         }
 
-        public string Remover(long id)
+        public ActionResult Remover(long id)
         {
             try
             {
                 Cidade cidade = db.Cidades.Find(id);
                 db.Cidades.Remove(cidade);
                 db.SaveChanges();
-
-                return Boolean.TrueString;
+                return Content(Boolean.TrueString);
             }
             catch
             {
-                return Boolean.FalseString;
+                return Content(Boolean.FalseString);
             }
         }
     }
