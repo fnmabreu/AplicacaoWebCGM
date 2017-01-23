@@ -1,6 +1,6 @@
 # AplicacaoWebCGM
 
-Desenvolvimento da aplicação WebCGM 
+Desenvolvimento da aplicação Web - Centro Gestão Médico 
 
 Exemplo do livro 'Desenvolvimento com ASP.NET MVC'
 
