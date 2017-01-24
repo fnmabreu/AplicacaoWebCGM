@@ -29,7 +29,6 @@ namespace WebCGM.Models
         public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<Utilizador> Utilizadores { get; set; }
         public DbSet<BannersPublicitario> BannersPublicitarios { get; set; }
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
+using WebCGM.App_Start;
 
 namespace WebCGM
 {
@@ -13,6 +15,7 @@ namespace WebCGM
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

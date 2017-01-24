@@ -13,6 +13,7 @@ namespace WebCGM.Controllers
         private EntidadeCGM db = new EntidadeCGM();
 
         // GET: Cidades
+        [Authorize]
         public ActionResult Index()
         {
             var cidades = db.Cidades;

@@ -11,6 +11,12 @@ namespace WebCGM.Controllers
     {
         private EntidadeCGM db = new EntidadeCGM();
 
+        public ActionResult Login()
+        {
+            ViewBag.Title = "Seja bem vindo!";
+            return View();
+        }
+
         public ActionResult Index()
         {
             ViewBag.Especialidades = new SelectList(db.Especialidades, "IDEspecialidade", "Nome");
